@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { PrismaService } from './prisma/prisma.service';
+import { TelegramModule } from './telegram/telegram.module';
 
 @Module({
   imports: [
@@ -11,7 +12,9 @@ import { PrismaService } from './prisma/prisma.service';
       isGlobal: true,
       ignoreEnvFile: true,
     }),
+    TelegramModule,
     PrismaModule,
+    TelegramModule,
   ],
   providers: [PrismaService, AppService],
   controllers: [AppController],
