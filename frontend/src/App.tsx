@@ -1,23 +1,14 @@
 import { useLaunchParams } from '@telegram-apps/sdk-react'
-import { useEffect } from 'react'
-import { api } from './api/axios.instance'
 import './App.css'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 
 function App() {
-	const initData = useLaunchParams(true).tgWebAppData
+	const initData = useLaunchParams().tgWebAppData
 
 	if (!initData) {
 		return <div>No initial data</div>
 	}
-
-	useEffect(() => {
-		api({
-			url: '',
-			method: '',
-		})
-	}, [])
 
 	return (
 		<>
