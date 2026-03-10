@@ -1,4 +1,5 @@
-import { useLaunchParams } from '@telegram-apps/sdk-react'
+import { themeParams, useLaunchParams } from '@telegram-apps/sdk-react'
+import { useEffect } from 'react'
 import { Link, Outlet } from 'react-router'
 
 function App() {
@@ -7,6 +8,12 @@ function App() {
 	if (!initData) {
 		return <div>No initial data</div>
 	}
+
+	useEffect(() => {
+		if (!themeParams.isCssVarsBound()) {
+			return themeParams.bindCssVars()
+		}
+	}, [])
 
 	return (
 		<>
