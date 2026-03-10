@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
 import { PrismaService } from './prisma/prisma.service';
 import { TelegramModule } from './telegram/telegram.module';
+import { OpenaiModule } from './openai/openai.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { TelegramModule } from './telegram/telegram.module';
     }),
     TelegramModule,
     PrismaModule,
+    OpenaiModule,
   ],
   providers: [PrismaService],
 })
