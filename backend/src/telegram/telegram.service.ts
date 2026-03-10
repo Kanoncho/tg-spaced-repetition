@@ -45,7 +45,7 @@ export class TelegramService extends Telegraf {
       },
     });
 
-    return result.token!;
+    return { token: result.token! };
   }
 
   async getToken(userId: number) {

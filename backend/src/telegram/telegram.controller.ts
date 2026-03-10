@@ -11,14 +11,14 @@ export class TelegramController {
   @HttpCode(HttpStatus.CREATED)
   @Auth()
   @Post('/token')
-  createToken(@CurrentUser() user: User): Promise<string> {
+  createToken(@CurrentUser() user: User): Promise<{ token: string }> {
     return this.telegramService.createToken(user.id);
   }
 
   @HttpCode(HttpStatus.OK)
   @Auth()
   @Get('/token')
-  getToken(@CurrentUser() user: User): string | null {
-    return user.token;
+  getToken(@CurrentUser() user: User): { token: string | null } {
+    return { token: user.token };
   }
 }
