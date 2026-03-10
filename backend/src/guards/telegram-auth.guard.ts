@@ -5,17 +5,21 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { validate } from '@telegram-apps/init-data-node';
+import { parse, validate } from '@telegram-apps/init-data-node';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class TelegramAuthGuard implements CanActivate {
   private readonly botToken: string;
 
-  constructor(private readonly configService: ConfigService) {
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly prisma: PrismaService,
+  ) {
     this.botToken = this.configService.getOrThrow<string>('TELEGRAM_BOT_TOKEN');
   }
 
-  canActivate(context: ExecutionContext): boolean {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
 
     const [type, data] = (request.headers.authorization ?? '').split(' ');
@@ -27,14 +31,28 @@ export class TelegramAuthGuard implements CanActivate {
     try {
       validate(data, this.botToken);
 
-      const urlParams = new URLSearchParams(data);
-      const userRaw = urlParams.get('user');
+      const tgUser = parse(data).user;
 
-      if (!userRaw) {
+      if (!tgUser) {
         throw new UnauthorizedException('User data is missing in initData');
       }
 
-      request.user = JSON.parse(userRaw);
+      let user = await this.prisma.user.findUnique({
+        where: {
+          id: tgUser.id,
+        },
+      });
+
+      if (!user) {
+        user = await this.prisma.user.create({
+          data: {
+            id: tgUser.id,
+          },
+        });
+      }
+
+      request.user = user;
+
       return true;
     } catch (e) {
       throw new UnauthorizedException('Invalid initData');
