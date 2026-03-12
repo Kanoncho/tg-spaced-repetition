@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { PrismaModule } from './prisma/prisma.module';
-import { PrismaService } from './prisma/prisma.service';
-import { TelegramModule } from './telegram/telegram.module';
+import { CardsModule } from './cards/cards.module';
 import { OpenaiModule } from './openai/openai.module';
+import { PrismaModule } from './prisma/prisma.module';
+import { TelegramModule } from './telegram/telegram.module';
+import { NotesModule } from './notes/notes.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { OpenaiModule } from './openai/openai.module';
     TelegramModule,
     PrismaModule,
     OpenaiModule,
+    CardsModule,
+    NotesModule,
   ],
-  providers: [PrismaService],
 })
 export class AppModule {}
