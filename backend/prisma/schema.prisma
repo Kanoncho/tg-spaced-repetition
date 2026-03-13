@@ -11,7 +11,9 @@ datasource db {
 model User {
   id Int @id
 
-  token String? @unique
+  token   String?  @unique
+  folders Folder[]
+  notes   Note[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -28,6 +30,9 @@ model Folder {
 
   notes Note[]
 
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -36,12 +41,15 @@ model Note {
   id    String @id @default(uuid())
   path  String @unique
   name  String
-  mtime Int
+  mtime Float
 
   folderId String?
   folder   Folder? @relation(fields: [folderId], references: [id])
 
   cards Card[]
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -51,7 +59,7 @@ model Card {
   id String @id @default(uuid())
 
   noteId String
-  note   Note   @relation(fields: [noteId], references: [id])
+  note   Note   @relation(fields: [noteId], references: [id], onDelete: Cascade)
 
   question String
   answer   String
