@@ -1,6 +1,7 @@
 import { themeParams, useLaunchParams } from '@telegram-apps/sdk-react'
 import { useEffect } from 'react'
 import { Link, Outlet } from 'react-router'
+import { BackButton } from './back-button'
 
 function App() {
 	const initData = useLaunchParams().tgWebAppData
@@ -17,6 +18,8 @@ function App() {
 
 	return (
 		<>
+			<BackButton />
+
 			<main>
 				<Outlet />
 			</main>
