@@ -5,6 +5,9 @@
 	--color-foreground: var(--tg-theme-text-color);
 	--color-accent: var(--tg-theme-accent-text-color);
 	--color-button: var(--tg-theme-button-color);
+	--color-background-secondary: var(--tg-theme-secondary-bg-color);
+	--color-hint: var(--tg-theme-hint-color);
+	--color-link: var(--tg-theme-link-color);
 }
 
 *,
@@ -14,25 +17,17 @@
 	-webkit-tap-highlight-color: transparent;
 }
 
-:root {
-	--bg-color: var(--tg-theme-bg-color);
-	--accent-color: var(--tg-theme-accent-text-color);
-	--text-color: var(--tg-theme-text-color);
-	--hint-color: var(--tg-theme-hint-color);
-	--button-text-color: var(--tg-theme-button-text-color);
-	--secondary-bg-color: var(--tg-theme-secondary-bg-color);
-}
-
 body {
 	font-family:
 		-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
 		sans-serif;
-	background-color: var(--tg-theme-bg-color);
 	color: var(--tg-theme-text-color);
 
 	width: 100%;
 	min-height: 100dvh;
 	overflow-x: hidden;
+	padding-top: var(--tg-safe-area-inset-top, 16px);
+	padding-bottom: var(--tg-safe-area-inset-bottom, 16px);
 
 	overscroll-behavior-y: none;
 
