@@ -32,7 +32,9 @@ export class NotesService {
       return { status: 'skipped', message: 'No changes detected' };
     }
 
-    const { cards } = await this.cardsService.generateCards(noteDto.content);
+    let { cards } = await this.cardsService.generateCards(noteDto.content);
+
+    cards = cards.map((card) => ({ ...card, userId: userId }));
 
     const folderId = await this.ensureFolderHierarchy(noteDto.path, userId);
 
@@ -61,9 +63,10 @@ export class NotesService {
           mtime: noteDto.mtime,
           userId: userId,
           folderId: folderId,
-          cards: {
-            create: cards,
-          },
+          cards: { create: cards },
+        },
+        select: {
+          cards: true,
         },
       });
     });
