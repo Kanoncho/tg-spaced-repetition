@@ -1,10 +1,14 @@
 import { themeParams, useLaunchParams } from '@telegram-apps/sdk-react'
 import { useEffect } from 'react'
-import { Link, Outlet } from 'react-router'
+import { Outlet, useLocation } from 'react-router'
 import { BackButton } from './back-button'
+import { Tabs } from './components/tabs'
 
 function App() {
 	const initData = useLaunchParams().tgWebAppData
+	const location = useLocation()
+
+	const showTabs = ['/', '/configuration', '/main'].includes(location.pathname)
 
 	if (!initData) {
 		return <div>No initial data</div>
@@ -24,10 +28,7 @@ function App() {
 				<Outlet />
 			</main>
 
-			<section className='p-2 flex gap-2 items-center fixed bottom-5 left-1/2 -translate-x-1/2 bg-amber-900'>
-				<Link to='/configuration'>Configuration</Link>
-				<Link to='/'>Main</Link>
-			</section>
+			{showTabs && <Tabs />}
 		</>
 	)
 }
