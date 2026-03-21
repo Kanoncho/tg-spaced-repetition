@@ -57,6 +57,20 @@ export function ConfigurationPage() {
 							DO NOT share this token with anyone, it’s your personal
 							identification key.
 						</span>
+						<div className='w-full p-3 bg-background-secondary rounded-lg flex flex-col gap-2 my-2'>
+							<div className='p-2 rounded-lg bg-background'>
+								{data?.token ? data.token : 'No token yet'}
+							</div>
+							<div className={isCreateFailed ? 'block' : 'hidden'}>
+								Failed to create a new token
+							</div>
+							<button
+								onClick={() => createToken()}
+								className='bg-button w-[150px] rounded-lg text-background p-2'
+							>
+								{isPending ? 'Generating...' : 'Generate token'}
+							</button>
+						</div>
 					</li>
 					<li>
 						Now copy the token you just created, open obsidian, then go to
