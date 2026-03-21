@@ -14,6 +14,7 @@ model User {
   token   String?  @unique
   folders Folder[]
   notes   Note[]
+  cards   Card[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -61,8 +62,16 @@ model Card {
   noteId String
   note   Note   @relation(fields: [noteId], references: [id], onDelete: Cascade)
 
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
   question String
   answer   String
+
+  reps       Int      @default(0)
+  easiness   Float    @default(2.5)
+  interval   Int      @default(0)
+  nextReview DateTime @default(now())
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
