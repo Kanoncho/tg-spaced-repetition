@@ -6,11 +6,23 @@ services:
     environment: 
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+      - POSTGRES_DB=${POSTGRES_DATABASE}
     ports: 
       - '5433:5432'
     volumes: 
       - postgres_data:/var/lib/postgresql
+  
+  redis: 
+    container_name: tsr_redis
+    image: redis:7.4-alpine 
+    restart: always
+    command: redis-server --save 60 1 --loglevel warning 
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis_data:/data 
+
 
 volumes: 
   postgres_data: 
+  redis_data:
