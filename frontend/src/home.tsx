@@ -1,5 +1,7 @@
-import { Link, useSearchParams } from 'react-router'
+import { useSearchParams } from 'react-router'
 import { useFolderContent } from './api/hooks/note/useFolderContent'
+import { PaddingWrapper } from './components/padding-wrapper'
+import { TreeElement } from './components/tree-element'
 
 export function HomePage() {
 	const [queryParams] = useSearchParams()
@@ -15,29 +17,28 @@ export function HomePage() {
 	}
 
 	return (
-		<section>
-			{data.folders.map(folder => {
-				return (
-					<Link
-						key={folder.id}
-						to={`/?folderId=${folder.id}`}
-						className='bg-amber-950 p-3'
-					>
-						{folder.name}
-					</Link>
-				)
-			})}
-			{data.notes.map(note => {
-				return (
-					<Link
-						key={note.id}
-						to={`/note?noteId=${note.id}`}
-						className='bg-amber-950 p-3'
-					>
-						{note.name}
-					</Link>
-				)
-			})}
-		</section>
+		<PaddingWrapper>
+			{' '}
+			<section className='grid grid-cols-2 gap-2'>
+				{data.folders.map(folder => {
+					return (
+						<TreeElement
+							name={folder.name}
+							link={`/?folderId=${folder.id}`}
+							type='folder'
+						/>
+					)
+				})}
+				{data.notes.map(note => {
+					return (
+						<TreeElement
+							name={note.name}
+							link={`/note?noteId=${note.id}`}
+							type='note'
+						/>
+					)
+				})}
+			</section>
+		</PaddingWrapper>
 	)
 }
