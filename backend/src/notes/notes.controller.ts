@@ -11,7 +11,7 @@ import { type User } from 'generated/prisma/client';
 import { Auth } from 'src/decorators/auth.decorator';
 import { CurrentUser } from 'src/decorators/current-user.decorator';
 import { ObsidianAuth } from 'src/decorators/obsidian-auth.decorator';
-import { NotesDto } from 'src/notes/notes.dto';
+import { NotesDto } from 'src/dto/notes/notes.dto';
 import { NotesService } from './notes.service';
 
 @Controller('notes')

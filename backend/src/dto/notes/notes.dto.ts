@@ -8,11 +8,11 @@ import {
 } from 'class-validator';
 
 export class NoteDto {
-  @IsString()
-  @IsNotEmpty()
+  @IsString({ message: 'Path must be a string' })
+  @IsNotEmpty({ message: 'Path is required' })
   path: string;
 
-  @IsString()
+  @IsString({ message: 'Content must be a string' })
   content: string;
 
   @IsNumber()

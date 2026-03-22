@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CardsService } from 'src/cards/cards.service';
-import { NoteDto } from 'src/notes/notes.dto';
+import { NoteDto } from 'src/dto/notes/notes.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
