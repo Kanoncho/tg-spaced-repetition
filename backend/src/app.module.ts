@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { BullmqBoardModule } from './bullmq-board/bullmq-board.module';
 import { BullmqModule } from './bullmq/bullmq.module';
 import { CardsModule } from './cards/cards.module';
 import { NotesModule } from './notes/notes.module';
@@ -19,6 +20,7 @@ import { TelegramModule } from './telegram/telegram.module';
     CardsModule,
     NotesModule,
     BullmqModule,
+    BullmqBoardModule,
   ],
 })
 export class AppModule {}
