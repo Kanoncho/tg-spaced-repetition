@@ -7,4 +7,13 @@ export const CardService = {
 
 		return response.data
 	},
+
+	async evaluateCard(mark: number, cardId: string) {
+		const response = await axiosWithAuth.patch(`/api/cards/evaluate`, {
+			mark,
+			cardId,
+		})
+
+		return response.data
+	},
 }

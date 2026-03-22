@@ -1,8 +1,11 @@
-import { useState } from 'react'
+import { useState, type SetStateAction } from 'react'
+import { CardService } from '../api/services/card.service'
 
 type Props = {
 	question: string
 	answer: string
+	cardId: string
+	setIsEvaluating: React.Dispatch<SetStateAction<boolean>>
 }
 
 const options = [
@@ -14,11 +17,25 @@ const options = [
 	{ text: 'Completely now it' },
 ]
 
-export function RepeatCard({ question, answer }: Props) {
+export function RepeatCard({
+	question,
+	answer,
+	cardId,
+	setIsEvaluating,
+}: Props) {
 	const [isAnswerVisible, setIsAnswerVisible] = useState<boolean>(false)
 
-	const handleClick = () => {
+	const handleClick = async (mark: number) => {
+		setIsEvaluating(true)
 		setIsAnswerVisible(true)
+
+		try {
+			await CardService.evaluateCard(mark, cardId)
+		} catch (e) {
+			console.log(e)
+		} finally {
+			setIsEvaluating(false)
+		}
 	}
 	return (
 		<section className=' h-screen flex items-center justify-center flex-col gap-3 mx-6'>
@@ -28,7 +45,7 @@ export function RepeatCard({ question, answer }: Props) {
 			{Array.from(options, (option, i) => {
 				return (
 					<div
-						onClick={handleClick}
+						onClick={() => handleClick(i)}
 						className='w-full py-3 rounded-lg bg-background-secondary flex items-center px-4'
 					>
 						{`${i} - ${option.text}`}
