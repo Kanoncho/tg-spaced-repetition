@@ -94,4 +94,59 @@ export class CardsService {
       },
     });
   }
+
+  async deleteCard(cardId: string, userId: number) {
+    const card = await this.prisma.card.findUnique({
+      where: {
+        id: cardId,
+        userId: userId,
+      },
+    });
+
+    if (!card) {
+      throw new BadRequestException('Card does not exist');
+    }
+
+    if (card.userId !== userId) {
+      throw new BadRequestException('Card does not belong to user');
+    }
+
+    return this.prisma.card.delete({
+      where: {
+        id: cardId,
+      },
+    });
+  }
+
+  async editCard(
+    question: string,
+    answer: string,
+    cardId: string,
+    userId: number,
+  ) {
+    const card = await this.prisma.card.findUnique({
+      where: {
+        id: cardId,
+        userId: userId,
+      },
+    });
+
+    if (!card) {
+      throw new BadRequestException('Card does not exist');
+    }
+
+    if (card.userId !== userId) {
+      throw new BadRequestException('Card does not belong to user');
+    }
+
+    return this.prisma.card.update({
+      where: {
+        id: cardId,
+      },
+      data: {
+        question: question,
+        answer: answer,
+      },
+    });
+  }
 }
