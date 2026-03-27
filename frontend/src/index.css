@@ -5,7 +5,7 @@
 	--color-foreground: var(--tg-theme-text-color);
 	--color-accent: var(--tg-theme-accent-text-color);
 	--color-button: var(--tg-theme-button-color);
-	--color-background-secondary: var(--tg-theme-secondary-bg-color);
+	--color-background-secondary: var(--tg-theme-section-bg-color);
 	--color-hint: var(--tg-theme-hint-color);
 	--color-link: var(--tg-theme-link-color);
 }

@@ -18,7 +18,7 @@ function App() {
 		if (!themeParams.isCssVarsBound()) {
 			return themeParams.bindCssVars()
 		}
-	}, [])
+	}, [themeParams])
 
 	return (
 		<>
