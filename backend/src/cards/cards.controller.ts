@@ -8,12 +8,12 @@ import {
   Patch,
 } from '@nestjs/common';
 import { type User } from '@telegram-apps/init-data-node';
-import { Auth } from 'src/decorators/auth.decorator';
-import { CurrentUser } from 'src/decorators/current-user.decorator';
-import { deleteCardDto } from 'src/dto/cards/delete-card.dto';
-import { editCardDto } from 'src/dto/cards/edit-card.dto';
-import { evaluateCardDto } from 'src/dto/cards/evaluate-card.dto';
+import { Auth } from 'src/common/decorators/auth.decorator';
+import { CurrentUser } from 'src/common/decorators/current-user.decorator';
 import { CardsService } from './cards.service';
+import { deleteCardDto } from './dto/delete-card.dto';
+import { editCardDto } from './dto/edit-card.dto';
+import { evaluateCardDto } from './dto/evaluate-card.dto';
 
 @Controller('cards')
 export class CardsController {

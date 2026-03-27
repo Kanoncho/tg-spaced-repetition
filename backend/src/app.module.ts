@@ -7,6 +7,7 @@ import { NotesModule } from './notes/notes.module';
 import { OpenaiModule } from './openai/openai.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { TelegramModule } from './telegram/telegram.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { TelegramModule } from './telegram/telegram.module';
     NotesModule,
     BullmqModule,
     BullmqBoardModule,
+    UserModule,
   ],
 })
 export class AppModule {}

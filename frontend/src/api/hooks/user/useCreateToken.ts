@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { TelegramService } from '../../services/telegram.service'
+import { UserService } from '../../services/user.service'
 
 export const useCreateToken = () => {
 	const queryClient = useQueryClient()
 
 	return useMutation({
-		mutationFn: TelegramService.createToken,
+		mutationFn: UserService.createToken,
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['token'] })
 		},

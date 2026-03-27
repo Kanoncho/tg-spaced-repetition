@@ -8,10 +8,10 @@ import {
   Query,
 } from '@nestjs/common';
 import { type User } from 'generated/prisma/client';
-import { Auth } from 'src/decorators/auth.decorator';
-import { CurrentUser } from 'src/decorators/current-user.decorator';
-import { ObsidianAuth } from 'src/decorators/obsidian-auth.decorator';
-import { NotesDto } from 'src/dto/notes/notes.dto';
+import { Auth } from 'src/common/decorators/auth.decorator';
+import { CurrentUser } from 'src/common/decorators/current-user.decorator';
+import { ObsidianAuth } from 'src/common/decorators/obsidian-auth.decorator';
+import { NotesDto } from 'src/notes/dto/notes.dto';
 import { NotesService } from './notes.service';
 
 @Controller('notes')

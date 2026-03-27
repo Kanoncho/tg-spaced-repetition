@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import { TelegramService } from '../../services/telegram.service'
+import { UserService } from '../../services/user.service'
 
 export const useGetToken = () => {
 	return useQuery({
 		queryKey: ['token'],
-		queryFn: () => TelegramService.getToken(),
+		queryFn: () => UserService.getToken(),
 	})
 }
