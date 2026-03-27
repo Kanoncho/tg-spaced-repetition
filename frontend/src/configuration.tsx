@@ -1,6 +1,6 @@
 import { openLink } from '@telegram-apps/sdk-react'
-import { useCreateToken } from './api/hooks/telegram/useCreateToken'
-import { useGetToken } from './api/hooks/telegram/useGetToken'
+import { useCreateToken } from './api/hooks/user/useCreateToken'
+import { useGetToken } from './api/hooks/user/useGetToken'
 import { PaddingWrapper } from './components/padding-wrapper'
 
 export function ConfigurationPage() {
