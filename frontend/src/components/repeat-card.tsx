@@ -1,11 +1,11 @@
-import { useState, type SetStateAction } from 'react'
-import { CardService } from '../api/services/card.service'
+import type { UseMutateFunction } from '@tanstack/react-query'
+import { useState } from 'react'
 
 type Props = {
 	question: string
 	answer: string
 	cardId: string
-	setIsEvaluating: React.Dispatch<SetStateAction<boolean>>
+	mutate: UseMutateFunction<any, Error, any, unknown>
 }
 
 const options = [
@@ -17,24 +17,16 @@ const options = [
 	{ text: 'Completely now it' },
 ]
 
-export function RepeatCard({
-	question,
-	answer,
-	cardId,
-	setIsEvaluating,
-}: Props) {
+export function RepeatCard({ question, answer, cardId, mutate }: Props) {
 	const [isAnswerVisible, setIsAnswerVisible] = useState<boolean>(false)
 
 	const handleClick = async (mark: number) => {
-		setIsEvaluating(true)
 		setIsAnswerVisible(true)
 
 		try {
-			await CardService.evaluateCard(mark, cardId)
+			mutate({ mark, cardId })
 		} catch (e) {
 			console.log(e)
-		} finally {
-			setIsEvaluating(false)
 		}
 	}
 	return (

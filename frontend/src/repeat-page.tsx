@@ -1,20 +1,20 @@
 import { mainButton } from '@telegram-apps/sdk-react'
 import { useEffect, useState } from 'react'
 import { useCardsDue } from './api/hooks/card/useCardsDue'
+import { useEvaluateCard } from './api/hooks/card/useEvaluateCard'
 import { RepeatCard } from './components/repeat-card'
 
 export function RepeatPage() {
 	const { data, isLoading, isError } = useCardsDue()
 	const [cardCounter, setCardCounter] = useState<number>(0)
-	const [isEvaluating, setIsEvaluating] = useState<boolean>(false)
+	const { mutate, isPending } = useEvaluateCard()
 
 	useEffect(() => {
 		const handleClick = () => setCardCounter(prev => prev + 1)
 		mainButton.setParams({
 			text: 'Next',
 			isVisible: true,
-			isEnabled: !isEvaluating,
-			isLoaderVisible: isEvaluating,
+			isEnabled: !isPending,
 		})
 
 		mainButton.onClick(handleClick)
@@ -23,7 +23,7 @@ export function RepeatPage() {
 			mainButton.setParams({ isVisible: false })
 			mainButton.offClick(handleClick)
 		}
-	}, [])
+	}, [isPending])
 
 	if (isLoading) {
 		return <div>Loading...</div>
@@ -37,7 +37,7 @@ export function RepeatPage() {
 		<RepeatCard
 			key={data[cardCounter].id}
 			cardId={data[cardCounter].id}
-			setIsEvaluating={setIsEvaluating}
+			mutate={mutate}
 			question={data[cardCounter].question}
 			answer={data[cardCounter].answer}
 		/>
