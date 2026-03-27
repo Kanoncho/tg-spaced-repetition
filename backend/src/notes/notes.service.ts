@@ -2,12 +2,14 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { CardsService } from 'src/cards/cards.service';
 import { NoteDto } from 'src/dto/notes/notes.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { TelegramService } from 'src/telegram/telegram.service';
 
 @Injectable()
 export class NotesService {
   constructor(
     private readonly prisma: PrismaService,
     private readonly cardsService: CardsService,
+    private readonly telegramService: TelegramService,
   ) {}
 
   async syncAllNotes(notes: NoteDto[], userId: number) {
@@ -17,6 +19,11 @@ export class NotesService {
 
     const sucessfullResults = allResults.filter(
       (result) => result.status === 'fulfilled',
+    );
+
+    await this.telegramService.notifySucessfullSync(
+      userId,
+      sucessfullResults.length,
     );
 
     return sucessfullResults;

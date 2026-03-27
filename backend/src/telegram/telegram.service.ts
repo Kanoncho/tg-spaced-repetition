@@ -50,34 +50,23 @@ export class TelegramService {
     const callbackData = (ctx.callbackQuery as any).data;
     const cardId = callbackData.split(':')[1];
 
-    // Ищем карточку в базе данных по ID
     const card = await this.prisma.card.findUnique({ where: { id: cardId } });
 
     if (!card) {
-      return ctx.editMessageText('Ошибка: карточка не найдена.');
+      return ctx.editMessageText('Card was not found');
     }
 
-    // Редактируем сообщение, показывая ответ
     await ctx.editMessageText(
       `Вопрос: ${card.question}\n\n<b>Ответ:</b> ${card.answer}`,
       { parse_mode: 'HTML' },
     );
   }
 
-  // @Command('test_inline_button')
-  // async testInlineButton(@Ctx() ctx: Context) {
-  //   await ctx.replyWithHTML('Test reply', {
-  //     reply_markup: {
-  //       inline_keyboard: [[{ text: 'Button', callback_data: 'test_callback' }]],
-  //     },
-  //   });
-  // }
+  async notifySucessfullSync(userId: number, notesAmount: number) {
+    const message = `Hey, some of your notes were sucessfully synchronized! Notes synchronized: ${notesAmount} `;
 
-  // @Action('test_callback')
-  // async testCallback(@Ctx() ctx: Context) {
-  //   ctx.answerCbQuery();
-  //   await ctx.editMessageText('Callback fired');
-  // }
+    this.bot.telegram.sendMessage(userId, message, { parse_mode: 'HTML' });
+  }
 
   async createToken(userId: number) {
     const token = uuidv4();
