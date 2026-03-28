@@ -21,12 +21,12 @@ export function ConfigurationPage() {
 
 	return (
 		<PaddingWrapper>
-			<section className='flex flex-col gap-10'>
+			<section className='flex flex-col gap-10 pb-24'>
 				<div className='flex flex-col gap-2'>
 					<h1 className='font-bold text-xl'>Configuration</h1>
 					<span className='text-hint'>
-						To use <span className='text-foreground'>*name* bot</span> you got
-						to spend a few minutes setting it up first. But don’t worry, in this
+						To use <span className='text-foreground'>TSR bot</span> you got to
+						spend a few minutes setting it up first. But don’t worry, in this
 						section i will go through this process step by step with you. Let’s
 						start!
 					</span>
@@ -36,19 +36,19 @@ export function ConfigurationPage() {
 						I assume that you are already using obsidian, but if not you can
 						download it here:{' '}
 						<span
-							onClick={() => openLink('https://google.com')}
-							className='text-purple-400'
+							onClick={() => openLink('https://obsidian.md/download')}
+							className='text-button underline'
 						>
-							https://google.com
+							https://obsidian.md/download
 						</span>
 					</li>
 					<li>
 						Download Telegram spaced repetition plugin:{' '}
 						<span
-							onClick={() => openLink('https://google.com')}
-							className='text-purple-400'
+							onClick={() => openLink('https://obsidian.md/plugins?search=TSR')}
+							className='text-button underline'
 						>
-							https://google.com
+							https://obsidian.md/plugins?search=TSR
 						</span>
 					</li>
 					<li>
@@ -68,7 +68,11 @@ export function ConfigurationPage() {
 								onClick={() => createToken()}
 								className='bg-button w-[150px] rounded-lg text-background p-2'
 							>
-								{isPending ? 'Generating...' : 'Generate token'}
+								{isPending
+									? 'Pending...'
+									: data?.token
+										? 'Regenerate token'
+										: 'Generate token'}
 							</button>
 						</div>
 					</li>
@@ -118,8 +122,8 @@ export function ConfigurationPage() {
 						<p>
 							That’s it. You will see a notification in obsidian about started
 							synchronization. When the proccess will be finished you’ll get a
-							notification from{' '}
-							<span className='text-foreground'>*name* bot</span>.
+							notification from <span className='text-foreground'>TSR bot</span>
+							.
 						</p>
 						<p>
 							You can find and manage your cards in bot’s mini app. Also the bot
@@ -128,13 +132,14 @@ export function ConfigurationPage() {
 							it here if you’re intrested:
 							<br />
 							<span
-								onClick={() => openLink('https://google.com')}
-								className='text-purple-400'
+								onClick={() =>
+									openLink('https://super-memory.com/english/ol/sm2.htm')
+								}
+								className='text-button underline'
 							>
-								https://google.com
+								https://super-memory.com/english/ol/sm2.htm
 							</span>
 						</p>
-						<p>Happy learning i guess? Happy indeed! :D</p>
 					</div>
 				</div>
 				{/* <h1>Configuration: {data?.token ? data.token : 'No token'}</h1>

@@ -26,8 +26,8 @@ body {
 	width: 100%;
 	min-height: 100dvh;
 	overflow-x: hidden;
-	padding-top: var(--tg-safe-area-inset-top, 16px);
-	padding-bottom: var(--tg-safe-area-inset-bottom, 16px);
+	padding-top: var(--tg-safe-area-inset-top, 20px);
+	padding-bottom: var(--tg-safe-area-inset-bottom, 20px);
 
 	overscroll-behavior-y: none;
 
