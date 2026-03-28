@@ -8,22 +8,36 @@ export function RepeatPage() {
 	const { data, isLoading, isError } = useCardsDue()
 	const [cardCounter, setCardCounter] = useState<number>(0)
 	const { mutate, isPending } = useEvaluateCard()
+	const [isAnswered, setIsAnswered] = useState(false)
 
 	useEffect(() => {
-		const handleClick = () => setCardCounter(prev => prev + 1)
+		mainButton.setParams({ isVisible: true })
+
+		return () => {
+			mainButton.setParams({ isVisible: false })
+		}
+	}, [])
+
+	useEffect(() => {
 		mainButton.setParams({
 			text: 'Next',
-			isVisible: true,
-			isEnabled: !isPending,
+			isEnabled: isAnswered && !isPending,
+			isLoaderVisible: isPending,
 		})
+	}, [isPending])
+
+	useEffect(() => {
+		const handleClick = () => {
+			setCardCounter(prev => prev + 1)
+			setIsAnswered(false)
+		}
 
 		mainButton.onClick(handleClick)
 
 		return () => {
-			mainButton.setParams({ isVisible: false })
 			mainButton.offClick(handleClick)
 		}
-	}, [isPending])
+	}, [cardCounter])
 
 	if (isLoading) {
 		return <div>Loading...</div>
@@ -40,6 +54,8 @@ export function RepeatPage() {
 			mutate={mutate}
 			question={data[cardCounter].question}
 			answer={data[cardCounter].answer}
+			setIsAnswered={setIsAnswered}
+			isAnswered={isAnswered}
 		/>
 	) : (
 		<div>Looks like you repeated all the cards</div>
