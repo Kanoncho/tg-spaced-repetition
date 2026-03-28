@@ -16,7 +16,6 @@ export function useTelegramBack() {
 		}
 	}, [folderId, noteId])
 
-	// Обработка нажатия
 	useEffect(() => {
 		const off = on('back_button_pressed', () => {
 			navigate(-1)
