@@ -2,7 +2,7 @@ import { InjectQueue } from '@nestjs/bullmq';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Queue } from 'bullmq';
-import { Action, Ctx, InjectBot, Start, Update } from 'nestjs-telegraf';
+import { Ctx, InjectBot, Start, Update } from 'nestjs-telegraf';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Context, Telegraf } from 'telegraf';
 
@@ -54,24 +54,6 @@ export class TelegramService {
           ],
         },
       },
-    );
-  }
-
-  @Action(/^answer:(.+)$/)
-  async showAnswer(@Ctx() ctx: Context) {
-    ctx.answerCbQuery();
-    const callbackData = (ctx.callbackQuery as any).data;
-    const cardId = callbackData.split(':')[1];
-
-    const card = await this.prisma.card.findUnique({ where: { id: cardId } });
-
-    if (!card) {
-      return ctx.editMessageText('Card was not found');
-    }
-
-    await ctx.editMessageText(
-      `Вопрос: ${card.question}\n\n<b>Ответ:</b> ${card.answer}`,
-      { parse_mode: 'HTML' },
     );
   }
 
