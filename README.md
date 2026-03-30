@@ -14,7 +14,7 @@ https://github.com/user-attachments/assets/9a40d4e8-6563-420f-8b85-cf520a7fb24a
 
 * **Backend**: NestJS, Prisma (PostgreSQL), BullMQ, Telegraf (Telegram Bot API).
 * **Frontend**: React (Vite + React Router), Tailwind CSS, TypeScript, FSD Architecture.
-* **Integrations**: OpenAI API, Telegram Mini App SDK for React, Obsidian Plugin (source code in a separate repo).
+* **Integrations**: OpenAI API, Telegram Mini App SDK for React, Obsidian Plugin (source code in a **[separate repo](https://github.com/Kanoncho/tg-spaced-repetition-plugin)**).
 
 ---
 
