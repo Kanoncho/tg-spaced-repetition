@@ -40,7 +40,21 @@ export class TelegramService {
       },
     );
 
-    await ctx.replyWithHTML(`Привет, ${username}`);
+    await ctx.replyWithHTML(
+      `Hello, ${username}!\nReady to configure the bot?`,
+      {
+        reply_markup: {
+          inline_keyboard: [
+            [
+              {
+                text: 'Configuration',
+                web_app: { url: `https://tsr.kanoncho.online/configuration` },
+              },
+            ],
+          ],
+        },
+      },
+    );
   }
 
   @Action(/^answer:(.+)$/)
