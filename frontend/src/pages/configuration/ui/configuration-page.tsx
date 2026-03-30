@@ -120,16 +120,16 @@ export function ConfigurationPage() {
 							actions
 						</p>
 						<p>
-							That’s it. You will see a notification in obsidian about started
-							synchronization. When the proccess will be finished you’ll get a
-							notification from <span className='text-foreground'>TSR bot</span>
-							.
+							That’s it. You will see a notification in obsidian saying how many
+							of your notes are currently synchronizing. When the proccess will
+							be finished you’ll get a notification from{' '}
+							<span className='text-foreground'>TSR bot</span>.
 						</p>
 						<p>
-							You can find and manage your cards in bot’s mini app. Also the bot
-							will throw at you some of your cards from time to time accordingly
-							to spaced repetition system called SuperMemo. You can read about
-							it here if you’re intrested:
+							You can find and manage your cards in the bot mini app. Also the
+							bot will throw at you some of your cards from time to time
+							accordingly to spaced repetition system called SuperMemo2. You can
+							read about it here if you’re intrested:
 							<br />
 							<span
 								onClick={() =>
