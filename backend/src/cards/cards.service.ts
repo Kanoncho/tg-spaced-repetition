@@ -15,8 +15,7 @@ export class CardsService {
       messages: [
         {
           role: 'system',
-          content: `Ты — ассистент по обучению. Извлеки информацию из Markdown и создай карточки Вопрос-Ответ. 
-          Используй ТОЛЬКО предоставленный текст. Сделай карточки на том языке, на котором написан контент в Markdown, а не на том на котором написан промпт. Верни JSON со следующей структурой: {cards: [{question: '...', answer: '...'}, ...]}.`,
+          content: `You are a learning assistant. Extract information from Markdown and create Q&A cards. Use ONLY the provided text. Create cards in the language of the Markdown content. Return JSON with the following structure: {cards: [{question: '...', answer: '...'}, ...]}.`,
         },
         { role: 'user', content: note },
       ],
