@@ -18,7 +18,6 @@ export function HomePage() {
 
 	return (
 		<PaddingWrapper>
-			{' '}
 			<section className='grid grid-cols-2 gap-2'>
 				{data.folders.map(folder => {
 					return (

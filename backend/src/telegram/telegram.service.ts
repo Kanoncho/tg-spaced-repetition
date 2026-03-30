@@ -1,10 +1,10 @@
-import { InjectQueue } from '@nestjs/bullmq';
-import { Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
-import { Queue } from 'bullmq';
-import { Ctx, InjectBot, Start, Update } from 'nestjs-telegraf';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { Context, Telegraf } from 'telegraf';
+import { InjectQueue } from '@nestjs/bullmq'
+import { Injectable } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
+import { Queue } from 'bullmq'
+import { Ctx, InjectBot, Start, Update } from 'nestjs-telegraf'
+import { PrismaService } from 'src/prisma/prisma.service'
+import { Context, Telegraf } from 'telegraf'
 
 @Update()
 @Injectable()
@@ -57,8 +57,8 @@ export class TelegramService {
     );
   }
 
-  async notifySucessfullSync(userId: number, notesAmount: number) {
-    const message = `Hey, some of your notes were sucessfully synchronized! Notes synchronized: ${notesAmount} `;
+  async notifySuccessfulSync(userId: number, notesAmount: number) {
+    const message = `Hey, some of your notes were successfully synchronized! Notes synchronized: ${notesAmount} `;
 
     this.bot.telegram.sendMessage(userId, message, { parse_mode: 'HTML' });
   }

@@ -1,8 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { CardsService } from 'src/cards/cards.service';
-import { NoteDto } from 'src/notes/dto/notes.dto';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { TelegramService } from 'src/telegram/telegram.service';
+import { BadRequestException, Injectable } from '@nestjs/common'
+import { CardsService } from 'src/cards/cards.service'
+import { NoteDto } from 'src/notes/dto/notes.dto'
+import { PrismaService } from 'src/prisma/prisma.service'
+import { TelegramService } from 'src/telegram/telegram.service'
 
 @Injectable()
 export class NotesService {
@@ -17,16 +17,16 @@ export class NotesService {
 
     const allResults = await Promise.allSettled(promises);
 
-    const sucessfullResults = allResults.filter(
+    const successfulResults = allResults.filter(
       (result) => result.status === 'fulfilled',
     );
 
-    await this.telegramService.notifySucessfullSync(
+    await this.telegramService.notifySuccessfulSync(
       userId,
-      sucessfullResults.length,
+      successfulResults.length,
     );
 
-    return sucessfullResults;
+    return successfulResults;
   }
 
   async syncOneNote(noteDto: NoteDto, userId: number) {
