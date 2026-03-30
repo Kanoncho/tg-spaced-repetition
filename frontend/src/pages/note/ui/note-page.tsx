@@ -1,7 +1,7 @@
 import { mainButton } from '@telegram-apps/sdk-react'
 import { useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router'
-import { useNoteCards } from '../../../shared/model/'
+import { useNoteCards } from '../../../shared/model'
 import { PaddingWrapper } from '../../../shared/ui'
 import { QuestionCard } from './question-card'
 
