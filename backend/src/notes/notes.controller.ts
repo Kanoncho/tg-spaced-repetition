@@ -20,19 +20,19 @@ export class NotesController {
 
   @HttpCode(HttpStatus.CREATED)
   @ObsidianAuth()
-  @Post('/sync')
+  @Post('sync')
   createMany(@CurrentUser() user: User, @Body() body: NotesDto) {
     return this.notesService.syncAllNotes(body.notes, user.id);
   }
 
   @Auth()
-  @Get('/folder')
+  @Get('folder')
   getFolder(@CurrentUser() user: User, @Query('folderId') folderId: string) {
     return this.notesService.getFolderContent(folderId, user.id);
   }
 
   @Auth()
-  @Get('/cards')
+  @Get('cards')
   getNoteCards(@CurrentUser() user: User, @Query('noteId') noteId: string) {
     return this.notesService.getNoteCards(noteId, user.id);
   }
