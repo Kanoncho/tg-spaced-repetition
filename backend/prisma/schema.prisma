@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider     = "prisma-client"
   output       = "../generated/prisma"
@@ -15,5 +9,70 @@ datasource db {
 }
 
 model User {
+  id Int @id
+
+  token   String?  @unique
+  folders Folder[]
+  notes   Note[]
+  cards   Card[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Folder {
+  id   String @id @default(uuid())
+  path String @unique
+  name String
+
+  parentId String?
+  parent   Folder?  @relation("SubFolders", fields: [parentId], references: [id])
+  folders  Folder[] @relation("SubFolders")
+
+  notes Note[]
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Note {
+  id    String @id @default(uuid())
+  path  String @unique
+  name  String
+  mtime Float
+
+  folderId String?
+  folder   Folder? @relation(fields: [folderId], references: [id])
+
+  cards Card[]
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Card {
   id String @id @default(uuid())
+
+  noteId String
+  note   Note   @relation(fields: [noteId], references: [id], onDelete: Cascade)
+
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  question String
+  answer   String
+
+  reps       Int      @default(0)
+  easiness   Float    @default(2.5)
+  interval   Int      @default(0)
+  nextReview DateTime @default(now())
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
