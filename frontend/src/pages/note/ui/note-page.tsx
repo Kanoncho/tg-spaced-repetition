@@ -36,13 +36,7 @@ export function NotePage() {
 		<PaddingWrapper>
 			<section className='flex gap-2 flex-col'>
 				{data.cards.map(card => {
-					return (
-						<QuestionCard
-							question={card.question}
-							answer={card.answer}
-							id={card.id}
-						/>
-					)
+					return <QuestionCard question={card.question} answer={card.answer} />
 				})}
 			</section>
 		</PaddingWrapper>
