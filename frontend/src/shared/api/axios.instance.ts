@@ -2,7 +2,7 @@ import { retrieveRawInitData } from '@telegram-apps/sdk-react'
 import axios from 'axios'
 
 export const axiosWithAuth = axios.create({
-	baseURL: import.meta.env.VITE_BACKEND_URL,
+	baseURL: '/',
 	timeout: 10000,
 	headers: {
 		'Content-Type': 'application/json',
