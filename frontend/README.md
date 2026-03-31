@@ -16,6 +16,12 @@ cd frontend
 npm install
 ```
 
+.env file:
+
+```
+VITE_BACKEND_URL='http://localhost:4000'
+```
+
 > [!NOTE]
 > The **[backend](https://github.com/Kanoncho/tg-spaced-repetition/blob/main/backend/README.md)** directory also has a README.md file which describes how to spin up a backend server.
 
