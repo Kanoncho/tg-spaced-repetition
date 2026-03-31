@@ -1,75 +1,58 @@
-# React + TypeScript + Vite
+# 🚀🤔 Quick Start
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Because we are trying to launch a web app inside Telegram, the setup will get a little trickier than usual.
 
-Currently, two official plugins are available:
+1. **📂 Clone the project**:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+git clone https://github.com/Kanoncho/tg-spaced-repetition.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. **📦 Install dependencies**:\
+   It's a monorepo, so you'll have to install separate dependencies for the frontend and backend parts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+cd frontend
+npm install
+```
+
+> [!NOTE]
+> The **[backend](https://github.com/Kanoncho/tg-spaced-repetition/blob/main/backend/README.md)** directory also has a README.md file which describes how to spin up a backend server.
+
+Here comes the fun part
+
+3. **🤖 Create a Telegram bot**:\
+   Every Telegram bot comes from **[@BotFather](https://telegram.me/BotFather)** which is just another bot for creating bots. Start BotFather and select the "/newbot" option in the menu. Then follow BotFather's instructions.
+
+4. **🔒 Get a secure url**:\
+   Now you need to provide a url which Telegram will open whenever someone tries to access the Mini App. Telegram requires an _https_ connection, so you cannot just specify _localhost_ in the Mini App url.
+
+   The easiest way to obtain it is to either use a tunnel (for example from Cloudflare) or to deploy the frontend part on Vercel. I recommend the latter if you aren't sure what you're doing or if you want just to see how the bot works. However, a tunnel is recommended if you are developing a Mini App locally, because changes will apply instantly and you will not have to wait for Vercel to redeploy your project after every change
+
+---
+
+### ▲ Vercel way
+
+1. **Fork this repository**:
+   Fork this repository by pressing the "Fork" button next to the repository name at the top of the page
+
+2. **Login on **[Vercel]()\*\*:
+   I recommend using your GitHub account to login.
+
+3. **Create a new project**:
+   Hit the "Add new" button, then "Project". Select your repository by clicking "Import".
+
+> [!NOTE]
+> Do not forget to specify the _frontend_ directory path as the "Root directory" by clicking "Edit"
+
+4. **Hit the "Deploy" button**
+
+---
+
+5. **⚙️ Set up the bot**:
+
+Now as you have a url with https protocol, open the BotFather Mini App, select the bot you have just created, than go to "Settings" section -> "Mini Apps" -> "Main App". Copy your Vercel (or tunnel) url and paste it into the "Main App url" field.
+
+6. **🧠 Setting up the backend part**:
+
+Whew, almost done! You can try to open the Mini App where you should see the bottom tabs and a "Loading..." text. However, to have a properly working bot, you also need to start the backend server. Fortunately the **[backend setup](https://github.com/Kanoncho/tg-spaced-repetition/blob/main/backend/README.md)** proccess is much easier.
